@@ -1,0 +1,1901 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  cursor: default;
+  user-select: none;
+}
+
+/* All the "interactive" elements will have a pointer cursor */
+
+input {
+  cursor: pointer;
+}
+
+/* Color Library */
+
+:root {
+
+  /* Header Colors */
+
+  --hover-header: #111111;
+  --background-header: #2c2c2c;
+  --background-search: #383838c2;
+  --line-separator: #444444;
+  --white-font: #ffffff;
+  --icon-top-right-background: #f24822;
+
+  /* Aside Colors */
+
+  --selected-background: #a8dbff50;
+  --aside-line-separator: #e6e6e6;
+  --upload-background: #f7f7f7;
+  --view-plans-button: #0e99ff;
+  --green-square: #15ae5c;
+  --free-button-background: #f2f9ff;
+  --free-button-font: #0185e4;
+
+  /* Main Colors */
+
+  --fig-jam-background: #f5f5f5ee;
+  --use-template-button: #9b4dff;
+  --see-all-text: #007be5;
+  --filters-text-grey: #0000004d;
+  --filters-icon-selected: #0d99ff;
+  --background-color-figma-basics: #e5e5e5;
+  --favorite-star-color: #ffcd29;
+  --background-close-window: #dbd8d89f;
+
+  /* Footer Colors */
+
+  --footer-help-background: #1e1e1e;
+}
+
+/* The only way I found to hide all the scroll bars; horizontal and vertical */
+
+body {
+  overflow: hidden;
+}
+
+
+
+/* Header */
+
+/* Icons Config => Filter BLACK to WHITE for SVG icons */
+
+.icon_nav {
+  filter: invert(100%) sepia(0%) saturate(7494%) hue-rotate(173deg) brightness(103%) contrast(99%);
+}
+
+/* Display flex in the whole header to arrange horizontally the 3 main containers => 
+   Space between to make the left and right profile section stick on the edges, the flex-grow: 1 will make the search bar stick to the left! */
+
+/* The padding-right is to make the same visual "mistake" as in the example */
+
+header {
+  display: flex;
+  padding-right: 13px;
+  height: 50px;
+  color: var(--white-font);
+  background-color: var(--background-header);
+}
+
+
+/* Top Left (1/3) */
+
+/* Main Container */
+
+.profile_container {
+  display: flex;
+  position: relative;
+  gap: 5px;
+  min-width: 241px;
+  padding: 5px 10px;
+}
+
+/* Hidden Input */
+
+.topuno {
+  position: absolute;
+  min-width: 241px;
+  max-width: 241px;
+  width: 100%;
+  height: 50px;
+  opacity: 0;
+  z-index: 1;
+}
+
+/* Fonts Config */
+
+.profile_info {
+  padding: 5px;
+}
+
+.profile_info > h3 {
+  font-size: 12px;
+}
+
+.profile_info > p {
+  font-size: 9px;
+  margin-top: 3px;
+}
+
+/* Arrow Position and Transition */
+
+[alt="Arrow_Select_Menu"] {
+  width: 10px;
+  position: absolute;
+  right: 20px;
+  top: 21px;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Actions */ 
+
+/* Visual effect of the .profile container when hover and checked */
+
+.topuno:hover ~ .profile_container,
+.topuno:checked ~ .profile_container {
+  background-color: var(--hover-header);
+}
+
+.topuno:hover ~ .profile_container [alt="Arrow_Select_Menu"],
+.topuno:checked ~ .profile_container [alt="Arrow_Select_Menu"] {
+  position: absolute;
+  right: 20px;
+  top: 25px;
+}
+
+
+/* Scroll menu when clicking on the input */
+
+.scrollone {
+  position: fixed;
+  top: 55px;
+  left: 6px;
+  width: 290px;
+  font-size: 12px;
+  color: white;
+  background-color: var(--footer-help-background);
+  border-radius: 2px;
+  z-index: 2;
+  display: none;
+}
+
+/* Clip Path */
+
+.clip_top_left {
+  position: absolute;
+  top: -15px;
+  left: 201px;
+  width: 20px;
+  height: 20px;
+  clip-path: polygon(50% 50%, 0% 100%, 100% 100%);
+  background-color: var(--footer-help-background);
+}
+
+/* First Container */
+
+.divuno {
+  padding: 10px 0px;
+  border-bottom: 0.1px solid rgba(128, 128, 128, 0.212);
+}
+
+.divuno > div {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding-left: 17px;
+  gap: 10px;
+  background-color: var(--view-plans-button);
+}
+
+/* Font Config */
+
+.divuno > span,
+.divdos > p {
+  line-height: 40px;
+  padding-left: 17px;
+  color: var(--fig-jam-background);
+  opacity: 0.4;
+}
+
+.divuno h3 {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Check Icon */
+
+img[alt="Scroll_Check"] {
+  position: absolute;
+  right: 20px;
+  width: 15px;
+  filter: invert(100%) sepia(1%) saturate(7400%) hue-rotate(111deg) brightness(112%) contrast(104%);
+}
+
+/* Second Container */
+
+.divdos {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin: 10px 0px;
+  padding-left: 9px;
+}
+
+/* Community Icon and Font Config */
+
+.divdos > img {
+  width: 44px;
+}
+
+.divdos > h3 {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Actions */
+
+/* Community blue hover effect */
+
+.divdos:hover {
+  background-color: var(--view-plans-button);
+}
+
+/* Scroll menu activation when checked */
+
+.topuno:checked ~ .scrollone {
+  display: block;
+}
+
+
+/* Center Header (2/3) */
+
+/* Main Container */
+
+/* Flex-grow: 1 => Makes the whole container stick to the LEFT; display:flex and align-items makes affect the content of it! */
+/* Min-width to the search container to make it responsive */
+
+.search_container {
+  position: relative;
+  min-width: 150px;
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid var(--line-separator);
+}
+
+/* Search Box */
+
+.search_box {
+  display: flex;
+  width: 385px;
+  height: 40px;
+  margin: 0 15px;
+  border-radius: 6px;
+  background-color: var(--background-search);
+}
+
+/* Search Icon */
+
+.search_box > img {
+  padding: 12px 13px 12px 18px;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+/* 100% width, overflow: hidden & text-overflow: ellipsis => For responsive effect, just as in the example */
+
+.search_box > input {
+  width: 100%;
+  padding: 5px 0px;
+  border: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  color: var(--white-font);
+  background-color: var(--background-search);
+  caret-color: var(--white-font);
+  outline: none;
+  cursor: text;
+}
+
+
+/* Suggestions Menu => Click on input menu */
+
+/* Finally understood the min-width and max-width with the width 100% */
+
+.suggestions {
+  position: absolute;
+  top: 50px;
+  left: 15px;
+  width: 100%;
+  max-width: 385px;
+  min-width: 320px;
+  padding-bottom: 10px;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 1px rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.808);
+  background-color: var(--white-font);
+  z-index: 2;
+  display: none;
+}
+
+/* Container */
+
+.selection-sugg > .project_description {
+  display: flex;
+  align-items: center;
+  height: 55px;
+  padding: 0px 10px;
+  margin: 0;
+}
+
+.suggestions > p {
+  font-size: 11px;
+  padding: 17px 0px 10px 15px;
+}
+
+/* Actions */
+
+/* Hover:not and outline search container => To avoid the hover effect when the input is focused */
+
+.search_box:hover:not(:focus-within) input,
+.search_box:hover:not(:focus-within) img {
+  background-color: rgba(128, 128, 128, 0.13);
+}
+
+.search_box:focus-within {
+  outline: 0.6px solid var(--filters-icon-selected);
+}
+
+/* Suggestions Menu effects */
+
+.search_box:focus-within ~ .suggestions {
+  display: block;
+}
+
+.suggestions .project_description:hover {
+  background-color: var(--fig-jam-background);
+}
+
+
+
+/* Top Right (3/3) */
+
+/* Main Container */
+/* The height inherit so the border separator will reach the whole header */
+
+.mini_profile_right {
+  min-width: 293px;
+  display: flex;
+  align-items: center;
+  height: inherit;
+}
+
+/* Explore Community Container (2 elements) */
+
+.explore_community {
+  height: inherit;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0px 20px 0px 5px;
+  border-right: 1px solid var(--line-separator);
+}
+
+/* The word-break property makes the text break when responsive just as in the example */
+
+.mini_profile_right > nav > h3 {
+  word-break: normal;
+  text-align: center;
+  font-size: 13px;
+}
+
+/* Profile Container (3 elements) */
+
+.uppercase_profile {
+  height: inherit;
+  display: flex;
+}
+
+/* Notification Icon */
+
+.uppercase_profile div {
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+}
+
+/* Profile Container */
+
+.uppercase_profile div:last-of-type {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 75px;
+  padding-left: 17px;
+}
+
+/* Hidden Input */
+
+.topdos {
+  position: absolute;
+  top: 0px;
+  right: 17px;
+  min-width: 75px;
+  max-width: 75px;
+  width: 100%;
+  height: 50px;
+  opacity: 0;
+  z-index: 1;
+}
+
+/* Circle Profile Icon (Used many times) */
+
+.lg {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 12px;
+  border-radius: 50%;
+  border: 0.5px solid #f8957f;
+  background-color: var(--icon-top-right-background);
+}
+
+/* Arrow Position and Transition */
+
+[alt="Last_Arrow"] {
+  width: 9px;
+  position: absolute;
+  right: 27px;
+  top: 21px;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Actions */
+
+/* Notification Icon */
+
+.uppercase_profile div:hover {
+  background-color: var(--hover-header);
+}
+
+/* Hover and checked */
+
+.topdos:hover ~ .mini_profile_right .lastdiv,
+.topdos:checked ~ .mini_profile_right .lastdiv {
+  background-color: var(--hover-header);
+}
+
+.topdos:hover ~ .mini_profile_right .lastdiv [alt="Last_Arrow"],
+.topdos:checked ~ .mini_profile_right .lastdiv [alt="Last_Arrow"] {
+  position: absolute;
+  right: 27px;
+  top: 25px;
+}
+
+
+/* Scroll Menu Config */
+
+.scrolltwo {
+  position: fixed;
+  top: 55px;
+  right: 6px;
+  width: 220px;
+  font-size: 12px;
+  color: white;
+  background-color: var(--footer-help-background);
+  border-radius: 3px;
+  z-index: 2;
+  display: none;
+}
+
+/* Clip Path */
+
+.clip_top_right {
+  position: absolute;
+  top: -15px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  clip-path: polygon(50% 50%, 0% 100%, 100% 100%);
+  background-color: var(--footer-help-background);
+}
+
+/* Icons */
+
+.scrolltwo img {
+  margin-left: 20px;
+  width: 17px;
+  height: 17px;
+  filter: invert(100%) sepia(1%) saturate(7400%) hue-rotate(111deg) brightness(112%) contrast(104%);
+}
+
+/* Containers */
+
+.divtres {
+  padding: 8px 0px;
+  border-bottom: 0.1px solid rgba(128, 128, 128, 0.212);
+}
+
+.divcuatro {
+  padding: 8px 0px;
+}
+
+.divtres > div:not(:last-child) {
+  display: flex;
+  align-items: center;
+  height: 34px;
+  gap: 14px;
+}
+
+.divcuatro > div {
+  display: flex;
+  align-items: center;
+  height: 34px;
+  gap: 14px;
+}
+
+/* Specific Lines */
+
+/* Profile line */
+
+.divtres div:first-child {
+  display: flex;
+  margin: 3px 0px 4px 16px;
+  gap: 10px;
+}
+
+/* Theme triangle icon position */
+
+.theme img:last-of-type {
+  position: absolute;
+  right: 20px;
+}
+
+/* Actions */
+
+/* Magnificent selector => This excludes the first child and the side menu, so the <p> :hover inside of it works */
+
+.divtres div:not(:first-child, .side-theme):hover {
+  background-color: var(--view-plans-button);
+}
+
+/* Blue effect selection on container */
+
+.divcuatro div:hover {
+  background-color: var(--view-plans-button);
+}
+
+/* Activate Scroll Menu */
+
+.topdos:checked ~ .scrolltwo {
+  display: block;
+}
+
+
+/* Side Theme Menu */
+
+.side-theme {
+  position: absolute;
+  top: 145px;
+  right: 220px;
+  width: 200px;
+  padding: 7px 0px;
+  background-color: var(--footer-help-background);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 3px;
+  z-index: 3;
+  display: none;
+}
+
+.side-theme p {
+  line-height: 25px;
+  text-align: left;
+  padding-left: 33px;
+}
+
+/* Check position */
+
+.side-theme img {
+  position: absolute;
+  width: 15px;
+  left: -10px;
+  bottom: 10px;
+}
+
+/* Actions */
+
+.side-theme p:hover {
+  background-color: var(--view-plans-button);
+}
+
+.theme:hover ~ .side-theme {
+  display: block;
+}
+
+.side-theme:hover {
+  display: block;
+}
+
+
+
+/* Aside */
+
+/* Main Container */
+
+/* Needed to go into a div for the hamburger menu to work (input coherence order) */
+
+.aside-menu {
+  display: flex;
+  flex-direction: column;
+  max-width: 242px;
+  min-height: 100vh;
+  font-size: 0.7rem;
+  border-right: 1px solid var(--aside-line-separator);
+}
+
+/* Hamburger and Close Icons for Responsive Hamburger Menu (Hidden in Desktop mode) */
+
+/* General Icon Config */
+
+aside > img {
+  width: 32px;
+  padding: 6px;
+  z-index: 4000;
+  display: none;
+}
+
+/* Close and Hamburger Icons */
+
+[alt^=Clo_] {
+  position: absolute;
+  top: 60px;
+  left: 10px;
+}
+
+ [alt^="Ham"] {
+  position: absolute;
+  top: 60px;
+  left: 10px;
+}
+
+/* Hamburger Hidden Input */
+
+.miam {
+  position: absolute;
+  top: 60px;
+  left: 15px;
+  width: 32px;
+  height: 32px;
+  opacity: 0;
+  z-index: 4001;
+}
+
+/* Actions */
+/* (The check action input is on the @media query Mobile config) */
+
+.miam:hover ~ img {
+  background-color: var(--fig-jam-background);
+  border-radius: 2px;
+}
+
+
+/* First Top Part (1/3) */ 
+
+/* Main Container */
+/* Position relative to the container to position the grey line separator above */
+
+.menu {
+  position: relative;
+  height: 255px;
+  margin-top: 9px;
+}
+
+/* Recents and Drafts */ 
+
+.menu span:first-of-type {
+  background-color: var(--selected-background);
+}
+
+/* Text and hover config */
+
+.menu > span {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 15px;
+  font-size: 9px;
+}
+
+.menu span:last-of-type:hover {
+  background-color: var(--fig-jam-background);
+}
+
+/* Line Separator Div; couldn't find a better way to do it */
+/* Position absolute to place it correctly */
+
+div.line {
+  position: absolute;
+  width: 209px;
+  height: 1px;
+  top: 78px;
+  left: 15px;
+  background-color: var(--aside-line-separator)
+}
+
+/* Upload Plan */
+/* Line-Height 1rem to make the text breath a bit more */
+
+.plan_content {
+  width: 209px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+  padding: 15px;
+  margin: 25px 15px 0px;
+  line-height: 1rem;
+  text-align: center;
+  background-color: var(--upload-background);
+  border-radius: 10px;
+}
+
+.plan_content > button {
+  width: 97%;
+  padding: 9px 0px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  color: var(--white-font);
+  font-weight: 500;
+  background-color: var(--view-plans-button);
+}
+
+
+/* Favorites Files (2/3) */
+
+.favorite_files {
+  position: relative;
+  height: 90px;
+  border-top: 1px solid var(--aside-line-separator);
+  border-bottom: 1px solid var(--aside-line-separator);
+}
+
+/* Text config and toggle position */
+
+.favorite_files > img {
+  position: absolute;
+  top: 19px;
+  left: 6px;
+}
+
+/* Set height to 30px just as the first section above so :hovers would look alike */
+/* I think there is an over use of padding and margin, could be better */
+
+.favorite_files > h4 {
+  height: 30px;
+  font-weight: 600;
+  padding: 10px 18px;
+  margin: 6px 0px; 
+}
+
+.favorite_files > p {
+  height: 30px;
+  padding: 0 18px;
+  opacity: 0.5;
+}
+
+/* Toggle to grey with the =^ (starts with) selector =>
+This is going to set to ALL toggles: Opacity to 0.5, display none and the general aside :hover */
+
+[alt^="Tog"] {
+  opacity: 0.5;
+  display: none;
+}
+
+aside:hover [alt^="Tog"] {
+  display: block;
+}
+
+
+/* Teams Section (3/3) */
+
+.teams {
+  position: relative;
+}
+
+.teams > h4 {
+  height: 30px;
+  font-weight: 600;
+  padding: 10px 18px;
+  margin-top: 6px;
+}
+
+/* Toggle position */
+
+.teams > img {
+  position: absolute;
+  top: 20px;
+  left: 6px;
+}
+
+/* Teams List */
+
+ul {
+  margin-top: 5px;
+}
+
+.teams li {
+  line-height: 30px;
+  padding: 0 43px;
+  list-style-type: none;
+}
+
+/* Icons sizes and config */
+
+/* Selector Specificity problem between two selector (0.1.1) VS (0.2.1) => CORRECTED */
+/* Whole value Selector => Square Icon Filter to green color #15ae5c, not quite the exact one */
+
+[alt*="Square"] {
+  width: 10px;
+  border-radius: 1px;
+  filter: invert(50%) sepia(99%) saturate(395%) hue-rotate(95deg) brightness(88%) contrast(90%);
+}
+
+/* Created little padding test in "+" Icon, to make it like a "button" bigger and square for :hover visual matters */
+
+[alt$="Iconp"] {
+  padding: 9px;
+}
+
+/* Ridiculous way to make the "---"(three rows) icon smaller */
+
+[alt^="Team"] {
+  width: 6px;
+  height: 7px;
+  object-fit: cover;
+}
+
+
+/* Icons Position (and Free Button Layout) */
+
+/* Box-sizing: content-box to make the margin, border of the button not affect the width of the button */
+
+.free_button {
+  box-sizing: content-box;
+  position: absolute;
+  top: 48px;
+  left: 143px;
+  width: 30px;
+  height: 16px;
+  font-size: 9px;
+  color: var(--free-button-font);
+  background-color: var(--free-button-background);
+  border: none;
+  border-radius: 3px;
+}
+
+[alt*="Square"] {
+  position: absolute;
+  top: 51px;
+  left: 23px;
+}
+
+[alt*="Plus1"] {
+  position: absolute;
+  top: 41px;
+  right: 18px;
+  display: none;
+}
+
+[alt^="Team"] {
+  position: absolute;
+  top: 82px;
+  left: 6px;
+  display: none;
+}
+
+/* Opacity instead of display none, to be able to hover the icon */
+
+[alt*="Plus2"] {
+  position: absolute;
+  top: 71px;
+  right: 18px;
+  opacity: 0;
+}
+
+[alt^="Add"] {
+  position: absolute;
+  top: 108px;
+  left: 19px;
+}
+
+/* Actions */
+
+ul li:hover {
+  background-color: var(--fig-jam-background);
+}
+
+ul li:hover [alt*="Plus1"], ul li:hover [alt*="Team"] {
+  display: block;
+}
+
+/* Free button */
+
+.free_button:hover {
+  background-color: #72c7ff80;
+}
+
+/* Plus Icon */
+
+[alt*="Plus1"]:hover, [alt*="Plus2"]:hover {
+  background-color: var(--background-close-window);
+  opacity: 1;
+}
+
+
+
+/* Main */
+
+/* Overflow: Auto and height to make the container scrollable, just like in the example => Header not affected! */
+
+main {
+  position: absolute;
+  top: 50px;
+  left: 242px;
+  height: calc(100vh - 50px);
+  overflow: auto;
+}
+
+
+/* Nav (1/3) */
+
+/* Sticky position with z-index to make the nav stick to the top of the page when scrolling the main content */
+/* Background color important for visual sticky scroll like example */
+
+.recently {
+  position: sticky;
+  top: 0px;
+  display: flex;
+  align-items: center;
+  padding: 0px 15px;
+  background-color: var(--white-font);
+  border-bottom: 1px solid var(--aside-line-separator);
+  z-index: 1;
+}
+
+/* First Container */
+
+main > nav {
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  background-color: var(--white-font);
+}
+
+main nav div > h3 {
+  flex-grow: 1;
+  line-height: 50px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-left: 13px;
+}
+
+/* Import Icon (Hidden in Desktop mode) */
+
+.recently img {
+  width: 32px;
+  padding: 6px;
+  display: none;
+}
+
+/* Actions */
+
+.recently img:hover {
+  background-color: var(--fig-jam-background);
+  border-radius: 2px;
+}
+
+
+/* New File and Import Container */
+
+/* Grid to make the container responsive => Clear difference between auto-fill and auto-fit */
+
+.new_file_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 30px;
+  padding: 25px 30px;
+}
+
+/* Grid Items (3 elements) */
+
+.new_file_container > div {
+  height: 75px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid var(--aside-line-separator);
+  border-radius: 5px;
+}
+
+/* Text Description */
+
+/* Flex-Grow property on the text container */
+/* White-space: nowrap to keep the first block description in one line when responsive */
+
+.text_description {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 5px;
+  padding-left: 8px;
+  white-space: nowrap;
+}
+
+/* Font config */
+
+.text_description > h4 {
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.text_description > p {
+  margin: 1px 0 3px 0;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* Icons Config */
+
+[alt^="Imp"] {
+  margin: 0 11px;
+}
+
+img[alt^="More"] {
+  margin: 0 10px;
+}
+
+/* Actions */
+
+.new_file_container > div:hover {
+  background-color: var(--fig-jam-background);
+}
+
+
+/* Explore FigJam Templates (2/3) */
+
+/* Main Container */
+/* Use of the 3 values (padding) => TOP - LEFT & RIGHT - BOTTOM */
+
+.figjam_container {
+  margin: 0 30px;
+  padding: 15px 25px 0px;
+  border-radius: 7px;
+  background-color: var(--fig-jam-background);
+}
+
+/* Text container and config */
+
+.fig_text_menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 10px 0px;
+}
+
+.fig_text_menu > h3 {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.fig_text_menu > p {
+  position: absolute;
+  right: 47px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--see-all-text);
+}
+
+/* Grey Tiny Line Separator and Position */
+
+.fig_text_menu > span {
+  position: absolute;
+  right: 30px;
+  width: 1px;
+  height: 33px;
+  background-color: var(--aside-line-separator);
+}
+
+/* Close Window Icon */
+
+.fig_text_menu > img {
+  position: absolute;
+  right: -10px;
+  width: 32px;
+  padding: 6px;
+  opacity: 0.7;
+}
+
+/* Actions */
+
+.fig_text_menu > img:hover {
+  background-color: var(--background-close-window);
+  border-radius: 3px;
+}
+
+
+/* Templates Main Container */
+
+/* The grid-template-rows set the number of rows to 1 and the grid-auto-rows to 0 to make the grid responsive in one row only
+The overflow hidden is to hide the others rows when the grid is responsive =>
+
+Difference from Padding and Vertical Gap ( 0 25px ) really obvious here */
+
+.list_template {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(197px, 1fr));
+  grid-template-rows: 1fr;
+  grid-auto-rows: 0;
+  overflow-y: hidden;
+  gap: 0 25px;
+  margin-top: 25px;
+}
+
+/* Grid Item Container */
+/* Position relative to make the use template button absolute, for same position when responsive */
+
+.list_template div {
+  position: relative;
+}
+
+/* Image config and title */
+
+.list_template > div img {
+  width: 100%;
+  border-radius: 7px;
+}
+
+.list_template h4 {
+  margin: 12px 0px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Use Template Button */
+
+/* Container Position and Size */
+
+.use_template_button {
+  position: absolute;
+  bottom: 195px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+
+/* Button Layout */
+
+.use_template_button button {
+  padding: 9px 12px;
+  border-radius: 7px;
+  background-color: var(--use-template-button);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--white-font);
+  border: none;
+  box-shadow: 0 0 1px var(--footer-help-background);
+}
+
+/* Actions */
+
+.use_template_button:hover {
+  opacity: 1;
+}
+
+
+
+/* Project Section (3/3) */
+
+
+section > nav {
+  position: relative;
+  margin: 30px 30px 0px;
+}
+
+/* Main Container */
+
+.select_div {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: var(--filters-text-grey);
+}
+
+/* Both Menus initial config */
+
+.filter > span:last-of-type,
+.sort > span:last-of-type {
+  margin: 0px 4px;
+  color: black;
+}
+
+
+/* Filter Menu */
+
+/* Hidden Input */
+
+.filter-input {
+  position: absolute;
+  left: 35px;
+  width: 60px;
+  opacity: 0;
+}
+
+/* Filter Menu */
+
+.left_menu {
+  position: sticky;
+  padding: 8px 0px;
+  width: 160px;
+  font-size: 12px;
+  color: white;
+  background-color: var(--footer-help-background);
+  border-radius: 2px;
+  display: none;
+}
+
+/* Inside Text */
+
+.left_menu p {
+  line-height: 25px;
+  text-align: left;
+  padding-left: 33px;
+}
+
+/* Check Icon Size and Position */
+
+img[alt="Fi_Check_Icon"] {
+  position: absolute;
+  left: 8px;
+  top: 14px;
+  width: 15px;
+  height: 13px;
+  filter: invert(100%) sepia(1%) saturate(7400%) hue-rotate(111deg) brightness(112%) contrast(104%);
+}
+
+/* Actions */
+
+.left_menu > p:hover {
+  background-color: var(--free-button-font);
+}
+
+/* Amazing way to make my sticky menu not move other elements when it appears */
+
+.filter-input:checked ~ .left_menu {
+  display: block;
+  position: absolute;
+  top: 25px;
+  left: 35px;
+}
+
+
+/* Sort Menu */
+
+/* Set the middle flex item, to the right, with margin-left: auto */
+
+.sort {
+  margin: 0px 20px 0px auto;
+}
+
+/* Hidden Input */
+
+.sort-input {
+  position: absolute;
+  right: 80px;
+  width: 80px;
+  opacity: 0;
+}
+
+/* Sort Menu */
+
+.right_menu {
+  position: sticky;
+  width: 160px;
+  font-size: 12px;
+  color: white;
+  background-color: var(--footer-help-background);
+  border-radius: 2px;
+  display: none;
+  z-index: 1;
+}
+
+/* Inside Text Containers (2) */
+
+.right_menu div {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0px;
+  border-bottom: 0.1px solid rgba(128, 128, 128, 0.212);
+}
+
+/* General text config */
+
+.right_menu div > span,
+.right_menu div > p {
+  line-height: 25px;
+  text-align: left;
+  padding-left: 33px;
+}
+
+.right_menu div > span {
+  color: var(--fig-jam-background);
+  opacity: 0.4;
+}
+
+/* Check Icons Size and Position */
+
+img[alt="Check_Icon"] {
+  position: absolute;
+  left: 8px;
+  top: 64px;
+  width: 15px;
+  height: 13px;
+  filter: invert(100%) sepia(1%) saturate(7400%) hue-rotate(111deg) brightness(112%) contrast(104%);
+ }
+ 
+ img[alt="Re_Check_Icon"] {
+  position: absolute;
+  left: 8px;
+  bottom: 16px;
+  width: 15px;
+  height: 13px;
+  filter: invert(100%) sepia(1%) saturate(7400%) hue-rotate(111deg) brightness(112%) contrast(104%);
+ }
+
+/* Actions */
+
+.right_menu div > p:hover {
+  background-color: var(--free-button-font);
+}
+
+.sort-input:checked ~ .right_menu {
+  display: block;
+  position: absolute;
+  top: 25px;
+  right: 5px;
+}
+
+
+/* Filters Icons (Squares Right Icon) */ 
+
+/* Icons Initial Config */
+
+.select_icons > svg {
+  margin-right: 4px;
+  width: 25px;
+  height: 25px;
+  padding: 2px;
+  border: 1px solid var(--aside-line-separator);
+  border-radius: 4px;
+}
+
+/* First Icon layout as it is already selected when opening the page */
+
+svg.four {
+  padding: 6px;
+  background-color: var(--fig-jam-background);
+  color: var(--see-all-text);
+  border-radius: 0px;
+  border: none;
+}
+
+/* Input Config and Position */
+
+.select_icons > input {
+  width: 22px;
+  height: 22px;
+}
+
+input.a {
+  position: absolute;
+  right: 37px;
+  opacity: 0;
+}
+
+input.b {
+  position: absolute;
+  right: 5px;
+  opacity: 0;
+}
+
+/* Action Checkbox */
+/* Interesting how the padding need 1 more px to have the same size as the icon because of the border */
+
+/* First Icon */
+
+input.a:checked ~ .four {
+  padding: 5px;
+  background-color: var(--white-font-color);
+  color: black;
+  border: 1px solid var(--aside-line-separator);
+  border-radius: 4px;
+}
+
+input.a:hover ~ .four {
+  background-color: var(--fig-jam-background);
+}
+
+/* Second Icon */
+
+input.b:checked ~ .three {
+  padding: 3px;
+  background-color: var(--fig-jam-background);
+  color: var(--see-all-text);
+  border-radius: 0px;
+  border: none;
+}
+
+input.b:hover ~ .three {
+  background-color: var(--fig-jam-background);
+}
+
+
+/* Projects Main Container */
+/* Created two rows, the one under empty to create more scroll space, just like the original example */
+
+.library {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-rows: 240px 240px;
+  gap: 35px;
+  padding: 23px 30px 35px;
+  margin-top: 12px;
+}
+
+/* Invisible Container to create more scroll space in the responsive version */
+
+.invisible {
+  visibility: hidden;
+}
+
+/* Project Container */
+
+.projects {
+  border: 1px solid var(--aside-line-separator);
+  border-radius: 6px;
+}
+
+/* Div Container of the image and image config */
+
+.image_project_container {
+  max-width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.image_project_container > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Last Image => Object-fit: contain; to make the image fit the container as in the example; + background color */
+
+#imgthree {
+  background-color: var(--background-color-figma-basics);
+  object-fit: contain;
+}
+
+/* Text Config => Used (.text_description) parameters from main > nav ; + these parameters */
+
+.project_description {
+  position: relative;
+  display: flex;
+  margin: 6px 0px;
+  padding: 0 10px;
+}
+
+/* Favorite Icon */
+
+/* Input Config => 
+Couldn't check the star icon behind the SVC icon, so I used Z-Index to have it first plan, but not visible */
+
+.project_description input {
+  position: absolute;
+  right: 19px;
+  bottom: 12px;
+  width: 22px;
+  height: 22px;
+  z-index: 1;
+  opacity: 0;
+}
+
+/* Fav Icon Position */
+
+svg.fav {
+  position: absolute;
+  right: 18px;
+  bottom: 10px;
+  width: 21px;
+  height: 21px;
+  opacity: 0.4;
+  visibility: hidden;
+}
+
+/* Actions */ 
+
+.projects:hover .fav {
+  visibility: visible;
+}
+
+.projects:hover {
+  box-shadow: 0 0 3px 0.5px var(--aside-line-separator);
+}
+
+/* Different box-shadow (down direction) for last box because of the grey background image */
+
+.projects:last-child:hover {
+  box-shadow: 0 1px 3px var(--aside-line-separator);
+}
+
+/* Star Click to Yellow */
+
+.star:checked ~ .fav {
+  visibility: visible;
+  color: var(--favorite-star-color);
+  opacity: 1;
+  fill: var(--favorite-star-color);
+}
+
+
+
+/* Footer */
+
+/* Help Button */
+
+.help {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 20px;
+  right: 29px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--footer-help-background);
+  z-index: 6666;
+}
+
+.help > p {
+  font-size: 19px;
+  font-weight: 100;
+  color: white;
+}
+
+/* Hidden Input */
+
+.help > input {
+  position: absolute;
+  opacity: 0;
+  width: 35px;
+  height: 35px;
+}
+
+/* Hover text "Help And Resources" */
+
+.help span:first-of-type {
+  position: fixed;
+  bottom: 70px;
+  right: 26px;
+  width: 125px;
+  padding: 8px 10px;
+  font-size: 11px;
+  text-align: center;
+  color: white;
+  background-color: var(--footer-help-background);
+  border-radius: 2px;
+  display: none;
+}
+
+/* Clip-path */
+
+.clip_help {
+  position: absolute;
+  bottom: 40px;
+  right: 16px;
+  width: 30%;
+  height: 30%;
+  clip-path: polygon(50% 57%, 0 0, 100% 0);
+  background-color: var(--footer-help-background);
+  display: none;
+}
+
+/* Clickable Help Menu */
+
+.help-menu {
+  position: fixed;
+  bottom: 70px;
+  right: 26px;
+  width: 145px;
+  font-size: 12px;
+  color: white;
+  background-color: var(--footer-help-background);
+  border-radius: 2px;
+  display: none;
+}
+
+/* Menu Text Configuration */
+
+/* This part has been really tricky; understood the huge importance between => Naming a class with "_" and "-"
+   And the practical use of a group selector; a bit late, but better than never */
+
+/* Blocks */
+
+.forum, .contact, .p_last {
+  padding: 8px 0px;
+  border-bottom: 0.1px solid rgba(128, 128, 128, 0.212);
+}
+
+/* Last block for the border-top */
+
+.p_last {
+  display: flex;
+  flex-direction: column;
+  border-top: 0.1px solid rgba(128, 128, 128, 0.212);
+}
+
+/* Text */
+
+.help-menu p {
+  width: 145px;
+  line-height: 25px;
+  text-align: left;
+  padding-left: 13px;
+}
+
+.help-menu > p {
+  margin: 8px 0px;
+ }
+
+/* Little hidden link of the repository *wink wink* */
+
+.help-menu a {
+  user-select: auto;
+  text-decoration: none;
+  color: white;
+  width: 145px;
+  line-height: 25px;
+  text-align: left;
+  padding-left: 13px;
+  cursor: pointer;
+}
+
+/* "Actions" => :hover for message, and check/uncheck for the menu */
+
+/* Hover message */
+
+.help:hover span {
+  display: block;
+}
+
+/* Clickable menu */
+
+.check_help:checked ~ .help-menu{
+  display: block;
+}
+
+.check_help:checked ~ .clip_help{
+  display: block;
+}
+
+.help-menu p:hover,
+.help-menu a:hover {
+  background-color: var(--free-button-font);
+}
+
+
+
+/* Media Queries */
+
+/* Mobile Responsive */
+
+@media only screen and (max-width: 645px) {
+
+/* Header */
+
+.profile_info {
+  display: none;
+}
+
+.profile_container {
+  min-width: 80px;
+  display: inline;
+}
+
+.profile_container > img:first-of-type {
+  position: absolute;
+  top: 10px;
+}
+/* Input */
+
+.topuno {
+  max-width: 80px;
+  min-width: 80px;
+}
+
+/* Top Menus Z-Index and left menu clip path re-position */
+
+.scrollone {
+  z-index: 9999;
+}
+
+.scrolltwo {
+  z-index: 9999;
+}
+
+.clip_top_left {
+  position: absolute;
+  top: -16px;
+  left: 39px;
+}
+
+/* Search Bar */
+
+.search_box > img {
+  display: none;
+}
+
+.search_box > input {
+  width: 100%;
+  padding: 0px 10px;
+  border-radius: 8px;
+}
+
+
+/* Explore and Notification */
+
+.mini_profile_right {
+  width: 100%;
+  flex-grow: 1;
+  min-width: auto;
+  max-width: min-content;
+}
+  
+.mini_profile_right > nav {
+  max-width: 150px;
+  gap: 4px;
+}
+
+/* Aside */
+
+/* Hamburger Menu => Lateral slide in and out */
+
+.aside-menu {
+  position: absolute;
+  top: 101px;
+  left: -250px;
+  z-index: 5555;
+  background-color: var(--white-font);
+  transition: left 0.3s ease-in-out;
+}
+
+.miam:checked ~ .aside-menu {
+  position: absolute;
+  top: 101px;
+  left: 0px;
+  z-index: 5555;
+}
+
+/* Icons and Burger Menu */
+
+[alt^="Ham"] {
+  display: block;
+  z-index: 2;
+}
+
+.recently > img {
+  display: block;
+}
+
+/* Icons switch Actions */
+
+.miam:checked ~ [alt^="Ham"] {
+  display: none;
+}
+
+.miam:checked ~ [alt^="Clo"] {
+  display: block;
+}
+
+/* Main */
+
+/* Repositioning the main container to the left */
+
+main {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+}
+
+.recently h3 {
+  padding-left: 30px;
+}
+
+/* P descriptions */
+
+main > nav p {
+  display: none;
+}
+
+/* New File Import and FigJam hidden */
+
+.new_file_container div:last-child {
+  display: none;
+}
+
+.figjam_container {
+  display: none;
+}
+}
+
+
+/* Tablet Responsive */
+
+@media only screen and (min-width: 646px) and (max-width: 1020px) {
+
+/* Header */
+
+/* Flex-grow for the top left container to smoothly grow and shrink */
+
+.profile_container {
+  flex-grow: 2;
+  min-width: 200px;
+}
+
+/* Main */
+
+/* Removed Padding Bottom */
+
+.new_file_container {
+  padding-bottom: 0px;
+}
+
+/* New Files Descriptions and Containers */
+
+.recently img:last-child {
+  display: block;
+}
+
+main > nav p {
+  display: none;
+}
+
+.new_file_container div:last-child {
+  display: none;
+}
+
+.figjam_container {
+  display: none;
+}
+}
